@@ -2,24 +2,27 @@ const { rejected, successfull } = require("../Response/Response");
 const Job = require("../Models/jobModel");
 const SearchJobs = async (req, res) => {
   try {
-    let { keyword, type, min, mode } = req.query;
+    let { keyword, type, min, mode, location } = req.body;
     let filter = {};
-    if (keyword) {
-      var jobTitle =
-        keyword.split(",").map((title) => new RegExp(title, "i")) || [];
+    if (keyword.length > 0) {
+      var jobTitle = keyword.map((title) => new RegExp(title, "i")) || [];
       filter.Job_title = { $in: jobTitle };
     }
+    if (location.length > 0) {
+      var locationarr = location.map((city) => new RegExp(city, "i")) || [];
+      filter.location = { $in: locationarr };
+    }
 
-    if (type) {
-      var jobType = type.split(",").map((type) => new RegExp(type, "i")) || [];
+    if (type.length > 0) {
+      var jobType = type.map((type) => new RegExp(type, "i")) || [];
       filter.job_type = { $in: jobType };
     }
     if (min) {
       filter["salary.max"] = { $gte: min };
     }
 
-    if (mode) {
-      var jobMode = mode.split(",").map((mode) => new RegExp(mode, "i")) || [];
+    if (mode.length > 0) {
+      var jobMode = mode.map((mode) => new RegExp(mode, "i")) || [];
       filter.job_mode = { $in: jobMode };
     }
     console.log(filter);

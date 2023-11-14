@@ -5,8 +5,10 @@ const { successfull, rejected } = require("../Response/Response");
 const CreateCompany = async (req, res) => {
   const user_id = req.params.id;
   const body = req.body;
+  console.log(req.body);
   try {
-    const company = await Company.create({ ...body, user_id });
+    const company = await new Company({ ...body, user_id });
+    company.save();
     return res.status(201).json(successfull(201, company));
   } catch (err) {
     return res.status(500).json(rejected(500, err.message));
@@ -18,7 +20,9 @@ const CreateCompany = async (req, res) => {
 const GetCompany = async (req, res) => {
   try {
     const user_id = req.params.id;
+    console.log(user_id);
     const company = await Company.find({ user_id });
+    console.log(company);
     if (!company)
       return res.status(404).json(successfull(404, "No company Found."));
     return res.status(200).json(successfull(200, company));

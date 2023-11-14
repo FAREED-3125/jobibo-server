@@ -1,18 +1,20 @@
 const { rejected } = require("../Response/Response");
 const jwt = require("jsonwebtoken");
-const Verify_token = (req, res, next) => {
+const Verify_token = async (req, res, next) => {
   try {
     const token = req.cookies.access_token;
+    console.log(token);
     if (!token) {
       return res.status(404).json(rejected(404, "Please Sign in or login."));
     }
-    const tokenDetails = jwt.verify(token, process.env.JWT_token);
-    if (!tokenDetails)
-      return res.status(404).json(rejected(404, "token not valid."));
-    else {
-      req.user = tokenDetails;
-      next();
-    }
+    await jwt.verify(token, process.env.JWT_token, (err, user) => {
+      if (err) {
+        return res.status(500).json(rejected(500, err));
+      } else {
+        req.user = user;
+        next();
+      }
+    });
   } catch (err) {
     console.log(err);
   }

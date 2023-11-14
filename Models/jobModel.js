@@ -16,7 +16,6 @@ const companySchema = new Schema(
     },
     no_of_applicants: {
       type: Number,
-      required: true,
     },
     about_job: {
       type: String,
@@ -41,6 +40,9 @@ const companySchema = new Schema(
     company_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "company",
+    },
+    location: {
+      type: String,
     },
   },
   { timestamps: true }

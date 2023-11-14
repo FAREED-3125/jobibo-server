@@ -17,6 +17,7 @@ const companySchema = new Schema(
     },
     company_opportunity: {
       type: Number,
+      default: 0,
     },
     user_id: {
       type: String,

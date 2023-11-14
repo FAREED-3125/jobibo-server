@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 //Router imports
 const UserRouter = require("./Routes/UserRoutes");
@@ -22,6 +23,11 @@ mongoose.connect(process.env.M_DB).then(() => {
 
 //middlewares
 app.use(cookieParser());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 // app.use(cors());
 app.use((req, res, next) => {
   console.log(req.path);
