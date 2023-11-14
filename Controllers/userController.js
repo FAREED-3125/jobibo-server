@@ -48,8 +48,8 @@ const CreateUser = async (req, res) => {
         }
       );
       return res
-        .cookie("access_token", accessToken)
-        .cookie("refresh_token", refreshToken)
+        .cookie("access_token", accessToken, { secure: true })
+        .cookie("refresh_token", refreshToken, { secure: true })
         .status(201)
         .json(
           successfull(201, {
@@ -106,8 +106,8 @@ const LoginUser = async (req, res) => {
           }
         );
         return res
-          .cookie("access_token", accessToken)
-          .cookie("refresh_token", refreshToken)
+          .cookie("access_token", accessToken, { secure: true })
+          .cookie("refresh_token", refreshToken, { secure: true })
           .status(201)
           .json(
             successfull(201, {
@@ -139,7 +139,7 @@ const RefreshTokenFunc = async (req, res) => {
       console.log({ refresh_token, others });
 
       res
-        .cookie("access_token", accessToken)
+        .cookie("access_token", accessToken, { secure: true })
         .cookie("refresh_token", refresh_token)
         .status(200)
         .json("successfull refreshed.");
@@ -182,8 +182,8 @@ const MakeAsRecruiter = (req, res) => {
         }
       );
       return res
-        .cookie("access_token", accessToken)
-        .cookie("refresh_token", refreshToken)
+        .cookie("access_token", accessToken, { secure: true })
+        .cookie("refresh_token", refreshToken, { secure: true })
         .status(201)
         .json(
           successfull(201, {
