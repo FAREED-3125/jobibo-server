@@ -28,7 +28,7 @@ app.use(
     extended: true,
   })
 );
-// app.use(cors());
+app.use(cors());
 app.use((req, res, next) => {
   console.log(req.path);
   next();
