@@ -31,18 +31,6 @@ app.use(
 // corsController.js
 
 const corsController = (req, res, next) => {
-  // Allow requests from any origin (you can customize this based on your needs)
-  res.header("Access-Control-Allow-Origin", "*");
-
-  // Set the allowed HTTP methods
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-
-  // Set the allowed headers
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-
   // Allow credentials (cookies, authorization headers) to be sent with the request
   res.header("Access-Control-Allow-Credentials", "true");
 
