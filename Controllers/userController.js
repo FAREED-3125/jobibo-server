@@ -115,6 +115,7 @@ const LoginUser = async (req, res) => {
               username: user.username,
               email: user.email,
               isRecruiter: user.isRecruiter,
+              accessToken,
             })
           );
       } else {
