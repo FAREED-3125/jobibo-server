@@ -38,7 +38,20 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: "*",
+    origin: (origin, callback) => {
+      // Check if the origin is allowed or if it's undefined (non-browser requests)
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "https://jobibo-client.vercel.app",
+        "https://jobibo-client-git-main-fareed-3125.vercel.app",
+      ]; // Add other allowed origins as needed
+
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
