@@ -1,6 +1,10 @@
 const { rejected } = require("../Response/Response");
 const jwt = require("jsonwebtoken");
 const Verify_token = async (req, res, next) => {
+  console.log({
+    access_token: process.env.JWT_token,
+    refresh_token: process.env.Jwt_refresh,
+  });
   try {
     const token = req.cookies.access_token;
     console.log(token);
