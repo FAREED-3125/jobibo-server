@@ -32,8 +32,8 @@ app.use(
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://jobibo-client.vercel.app/",
-  "https://vercel.com/fareed-3125/jobibo-client/Gzwx2jFvvuDXPbd2XRuMXprWsAdY",
+  "https://jobibo-client.vercel.app",
+  "https://jobibo-client-git-main-fareed-3125.vercel.app",
 ];
 
 app.use(
