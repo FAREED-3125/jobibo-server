@@ -30,17 +30,26 @@ app.use(
 );
 // corsController.js
 
-const corsController = (req, res, next) => {
-  // Allow credentials (cookies, authorization headers) to be sent with the request
-  res.header("Access-Control-Allow-Credentials", "true");
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://jobibo-client.vercel.app/",
+  "https://vercel.com/fareed-3125/jobibo-client/Gzwx2jFvvuDXPbd2XRuMXprWsAdY",
+];
 
-  // Continue to the next middleware
-  next();
-};
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Check if the incoming origin is allowed or if it's undefined (non-browser requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
-module.exports = corsController;
-
-app.use(cors(corsController));
 app.use((req, res, next) => {
   console.log(req.path);
   next();
