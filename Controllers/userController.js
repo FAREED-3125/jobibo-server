@@ -48,8 +48,14 @@ const CreateUser = async (req, res) => {
         }
       );
       return res
-        .cookie("access_token", accessToken, { secure: true })
-        .cookie("refresh_token", refreshToken, { secure: true })
+        .cookie("access_token", accessToken, {
+          sameSite: "None",
+          secure: true, // This ensures the cookie is only sent over HTTPS
+        })
+        .cookie("refresh_token", refreshToken, {
+          sameSite: "None",
+          secure: true, // This ensures the cookie is only sent over HTTPS
+        })
         .status(201)
         .json(
           successfull(201, {
@@ -106,8 +112,14 @@ const LoginUser = async (req, res) => {
           }
         );
         return res
-          .cookie("access_token", accessToken, { secure: true })
-          .cookie("refresh_token", refreshToken, { secure: true })
+          .cookie("access_token", accessToken, {
+            sameSite: "None",
+            secure: true, // This ensures the cookie is only sent over HTTPS
+          })
+          .cookie("refresh_token", refreshToken, {
+            sameSite: "None",
+            secure: true, // This ensures the cookie is only sent over HTTPS
+          })
           .status(201)
           .json(
             successfull(201, {
@@ -115,7 +127,6 @@ const LoginUser = async (req, res) => {
               username: user.username,
               email: user.email,
               isRecruiter: user.isRecruiter,
-              accessToken,
             })
           );
       } else {
@@ -140,7 +151,10 @@ const RefreshTokenFunc = async (req, res) => {
       console.log({ refresh_token, others });
 
       res
-        .cookie("access_token", accessToken, { secure: true })
+        .cookie("access_token", accessToken, {
+          sameSite: "None",
+          secure: true, // This ensures the cookie is only sent over HTTPS
+        })
         .cookie("refresh_token", refresh_token)
         .status(200)
         .json("successfull refreshed.");
@@ -183,8 +197,14 @@ const MakeAsRecruiter = (req, res) => {
         }
       );
       return res
-        .cookie("access_token", accessToken, { secure: true })
-        .cookie("refresh_token", refreshToken, { secure: true })
+        .cookie("access_token", accessToken, {
+          sameSite: "None",
+          secure: true, // This ensures the cookie is only sent over HTTPS
+        })
+        .cookie("refresh_token", refreshToken, {
+          sameSite: "None",
+          secure: true, // This ensures the cookie is only sent over HTTPS
+        })
         .status(201)
         .json(
           successfull(201, {
